@@ -1,36 +1,60 @@
-import React from 'react'
+import React from "react";
+
+function LoginWarning(props) {
+  if (props.isLogin) {
+    return null;
+  }
+  return <span>you need login in</span>;
+}
+
+function List(props) {
+  let list = props.list;
+  let lis = list.map(item => {
+    return <li key={item.toString()}>{item}</li>;
+  });
+  return <ul>{lis}</ul>;
+}
 
 class Mycom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       //this指当前实例，即实例化此组件时的实例对象，这里个人理解创建此组件时在构造方法中初始化其state
-      lableName: props.name,
-      lable2: "kick"
+      isLogin: false,
+      list: [1, 2, 3]
     };
-    this.tick = this.tick.bind(this)
+    this.loginIn = this.loginIn.bind(this);
+    this.loginOut = this.loginOut.bind(this);
   }
-  s = "属性";
   render() {
     return (
       <div>
-        <span className="my-fk-span">{this.state.lableName}</span>
-        <button onClick={this.aleryName.bind(this,this.state.lableName)}>click me1</button>
-        <button onClick={(e)=>this.aleryName(this.state.lableName,e)}>click me2</button>
+        <List list={this.state.list} />
+        <LoginWarning isLogin={this.state.isLogin} />
+        {this.state.isLogin ? (
+          <div>
+            <span>now in</span>
+            <button onClick={this.loginOut}>login out</button>
+          </div>
+        ) : (
+          <div>
+            <span>now out</span>
+            <button onClick={this.loginIn}>login in</button>
+          </div>
+        )}
       </div>
     );
   }
-  tick() {
-    this.setState((predState, props) => ({
-      lableName: predState.lableName + props.name + this.s + predState.lable2
-    }));
+  loginIn() {
+    this.setState({
+      isLogin: true
+    });
   }
-  aleryName(name,e){
-    this.setState((predState, props) => ({
-      lableName: predState.lableName + props.name + this.s + predState.lable2
-    }));
-    alert(name)
+  loginOut() {
+    this.setState({
+      isLogin: false
+    });
   }
 }
 
-export default Mycom
+export default Mycom;
