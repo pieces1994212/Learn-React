@@ -50,7 +50,7 @@ class MyForm extends React.Component {
             onChange={this.handelInput}
           >
             {this.state.hobbys.map(e => (
-              <option value={e.value}>{e.name}</option>
+              <option value={e.value} key={e.name}>{e.name}</option>
             ))}
           </select>
         </label>

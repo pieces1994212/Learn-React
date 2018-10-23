@@ -1,13 +1,25 @@
 import React from "react";
 
-function MytestBox(props) {
-  return (
-    <div>
-      <h1>{props.title}</h1>
-      <p>{props.readme}</p>
-      {props.children}
-    </div>
-  );
+// function MytestBox(props) {
+//   return (
+//     <div>
+//       <h1>{props.title}</h1>
+//       <p>{props.readme}</p>
+//       {props.children}
+//     </div>
+//   );
+// }
+
+class MytestBox extends React.Component{
+  render(){
+    return(
+      <div>
+        <h1>{this.props.title}</h1>
+        <p>{this.props.readme}</p>
+        {this.props.children}
+      </div>
+    )
+  }
 }
 
 class TestMyTestBox extends React.Component {
@@ -18,6 +30,8 @@ class TestMyTestBox extends React.Component {
       readme: "Welcome to mini cars world",
       info: ""
     };
+    this.myRef = React.createRef();
+    this.myCusRef = React.createRef();
     this.handelLogin = this.handelLogin.bind(this);
     this.handelInput = this.handelInput.bind(this);
   }
@@ -27,14 +41,16 @@ class TestMyTestBox extends React.Component {
     });
   }
   handelLogin(e) {
+    console.log(this.myRef.current);
+    console.log(this.myCusRef.current);
     alert(this.state.info + "login success");
   }
   render() {
     return (
-      <MytestBox title={this.state.header} readme={this.state.readme}>
+      <MytestBox title={this.state.header} readme={this.state.readme} ref={this.myCusRef}>
         <div>
           <input value={this.state.info} onChange={this.handelInput} />
-          <button type="button" onClick={this.handelLogin}>
+          <button type="button" onClick={this.handelLogin} ref={this.myRef}>
             submit
           </button>
         </div>

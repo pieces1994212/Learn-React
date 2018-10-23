@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Button } from 'antd';
 function LoginWarning(props) {
   if (props.isLogin) {
     return null;
@@ -34,12 +34,12 @@ class Mycom extends React.Component {
         {this.state.isLogin ? (
           <div>
             <span>now in</span>
-            <button onClick={this.loginOut}>login out</button>
+            <Button onClick={this.loginOut}>login out</Button>
           </div>
         ) : (
           <div>
             <span>now out</span>
-            <button onClick={this.loginIn}>login in</button>
+            <Button onClick={this.loginIn}>login in</Button>
           </div>
         )}
       </div>
